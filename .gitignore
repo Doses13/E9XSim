@@ -1,0 +1,86 @@
+# Virtual machine disks, installation media, and saved state
+*.iso
+*.qcow
+*.qcow2
+*.vhd
+*.vhdx
+*.vdi
+*.vmdk
+*.vmem
+*.vmss
+*.sav
+
+# Local VM credentials
+/cic-vm/credentials.txt
+
+# Visual Studio and other IDE user state
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# .NET / WPF build and test output
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+
+# CMake / Ninja build output and local presets
+out/
+build/
+cmake-build-*/
+CMakeUserPresets.json
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+compile_commands.json
+build.ninja
+rules.ninja
+.ninja_deps
+.ninja_log
+
+# Compiled artifacts and debug symbols
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.pch
+
+# Local environment secrets (keep example files shareable)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Editor backups, temporary files, and logs
+*.bak
+*.bk
+*.orig
+*.rej
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+
+# OS-generated metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

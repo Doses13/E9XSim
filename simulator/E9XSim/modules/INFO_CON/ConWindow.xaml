@@ -1,0 +1,259 @@
+﻿<Window x:Class="E9XSim.modules.INFO_CON.ConWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CON"
+        Width="540"
+        Height="820"
+        ResizeMode="CanResize"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Window.Resources>
+        <!-- Debug overlay brushes: visible enough to tune, transparent enough to see the photo. -->
+        <SolidColorBrush x:Key="ConButtonFill" Color="#1F54C1E6"/>
+        <SolidColorBrush x:Key="ConButtonStroke" Color="#7F83A5B1"/>
+
+        <SolidColorBrush x:Key="ConTiltFill" Color="#30B56CFF"/>
+        <SolidColorBrush x:Key="ConTiltStroke" Color="#B0B56CFF"/>
+
+        <SolidColorBrush x:Key="ConPressFill" Color="#3048D17C"/>
+        <SolidColorBrush x:Key="ConPressStroke" Color="#B048D17C"/>
+        
+    </Window.Resources>
+
+    <Grid Margin="12">
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="500"
+                    Height="750">
+
+                <!-- Real controller photo -->
+                <Image Source="/E9XSim;component/resources/images/iDriveKnob.jpeg"
+                       Width="500"
+                       Height="750"
+                       Stretch="Fill"/>
+
+                <!-- =========================================================
+                     TOP / SIDE HARD BUTTONS
+                     These paths follow the visible seams in the supplied photo.
+                     ========================================================= -->
+
+                <!-- CD -->
+                <Path Data="M 114,58
+                            Q 140,50 192,44
+                            Q 188,80 186,122
+                            Q 134,134 84,160
+                            L 100,74
+                            Q 102,61 114,58 
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="CD"
+                      ToolTip="CD"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- MENU -->
+                <Path Data="M 200,43
+                            Q 248,39 294,43
+                            Q 302,140 304,184
+                            L 304,216
+                            Q 250,204 192,216
+                            L 192,184 
+                            Q 194,140 200,44
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="MENU"
+                      ToolTip="MENU"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- TEL -->
+                <Path Data="M 380,62
+                            Q 354,50 302,44
+                            Q 306,80 309,122
+                            Q 362,134 408,159
+                            L 392,78
+                            Q 390,66 380,62 
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="TEL"
+                      ToolTip="TEL"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- RADIO -->
+                <Path Data="M 82,168
+                            Q 126,144 186,128
+                            Q 183,170 183,218
+                            Q 116,242 71,298
+                            Q 72,256 82,168
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="RADIO"
+                      ToolTip="RADIO"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- NAV -->
+                <Path Data="M 410,168
+                            Q 370,144 309,128
+                            Q 312,170 312,218
+                            Q 380,242 422,296
+                            Q 421,240 410,168
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="NAV"
+                      ToolTip="NAV"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- BACK -->
+                <Path Data="M 248,632
+                            Q 159,628 100,566
+                            L 82,562
+                            L 105,682
+                            Q 108,698 120,702
+                            Q 170,714 248,715
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="BACK"
+                      ToolTip="BACK"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- OPTION -->
+                <Path Data="M 256,632
+                            Q 343,624 400,560
+                            L 416,557
+                            L 397,682
+                            Q 395,695 380,698
+                            Q 320,712 256,715
+                            Z"
+                      Fill="{StaticResource ConButtonFill}"
+                      Stroke="{StaticResource ConButtonStroke}"
+                      StrokeThickness="2"
+                      Tag="OPTION"
+                      ToolTip="OPTION"
+                      Cursor="Hand"
+                      PreviewMouseLeftButtonDown="Button_MouseDown"
+                      PreviewMouseLeftButtonUp="Button_MouseUp"/>
+
+                <!-- =========================================================
+                     MAIN KNOB
+                     The outer transparent ellipse catches the mouse wheel.
+                     Four annular sectors represent the spring-centered bump
+                     directions. The center circle is the vertical press.
+                     ========================================================= -->
+
+                <Canvas Canvas.Left="126"
+                        Canvas.Top="285"
+                        Width="248"
+                        Height="248"
+                        Background="Transparent"
+                        MouseWheel="Knob_MouseWheel">
+
+                    <!-- Tilt Up -->
+                    <Path Data="M 50,44
+                                A 116,116 0 0 1 212,44
+                                L 173,86
+                                A 58,58 0 0 0 92,86
+                                Z"
+                          Fill="{StaticResource ConTiltFill}"
+                          Stroke="{StaticResource ConTiltStroke}"
+                          StrokeThickness="2"
+                          Tag="TILT_UP"
+                          ToolTip="Tilt Up"
+                          Cursor="Hand"
+                          PreviewMouseLeftButtonDown="Tilt_MouseDown"
+                          PreviewMouseLeftButtonUp="Tilt_MouseUp"/>
+
+                    <!-- Tilt Right -->
+                    <Path Data="M 212,44
+                                A 120,120 0 0 1 212,216
+                                L 173,173
+                                A 58,58 0 0 0 173,86
+                                Z"
+                          Fill="{StaticResource ConTiltFill}"
+                          Stroke="{StaticResource ConTiltStroke}"
+                          StrokeThickness="2"
+                          Tag="TILT_RIGHT"
+                          ToolTip="Tilt Right"
+                          Cursor="Hand"
+                          PreviewMouseLeftButtonDown="Tilt_MouseDown"
+                          PreviewMouseLeftButtonUp="Tilt_MouseUp"/>
+
+                    <!-- Tilt Down -->
+                    <Path Data="M 212,216
+                                A 116,116 0 0 1 50,216
+                                L 92,173
+                                A 58,58 0 0 0 173,173
+                                Z"
+                          Fill="{StaticResource ConTiltFill}"
+                          Stroke="{StaticResource ConTiltStroke}"
+                          StrokeThickness="2"
+                          Tag="TILT_DOWN"
+                          ToolTip="Tilt Down"
+                          Cursor="Hand"
+                          PreviewMouseLeftButtonDown="Tilt_MouseDown"
+                          PreviewMouseLeftButtonUp="Tilt_MouseUp"/>
+
+                    <!-- Tilt Left -->
+                    <Path Data="M 50,216
+                                A 120,120 0 0 1 50,44
+                                L 92,86
+                                A 58,58 0 0 0 92,173
+                                Z"
+                          Fill="{StaticResource ConTiltFill}"
+                          Stroke="{StaticResource ConTiltStroke}"
+                          StrokeThickness="2"
+                          Tag="TILT_LEFT"
+                          ToolTip="Tilt Left"
+                          Cursor="Hand"
+                          PreviewMouseLeftButtonDown="Tilt_MouseDown"
+                          PreviewMouseLeftButtonUp="Tilt_MouseUp"/>
+
+                    <!-- Center vertical press -->
+                    <Ellipse Canvas.Left="74.5"
+                             Canvas.Top="71.5"
+                             Width="116"
+                             Height="116"
+                             Fill="{StaticResource ConPressFill}"
+                             Stroke="{StaticResource ConPressStroke}"
+                             StrokeThickness="2"
+                             ToolTip="Knob Press"
+                             Cursor="Hand"
+                             PreviewMouseLeftButtonDown="Knob_MouseDown"
+                             PreviewMouseLeftButtonUp="Knob_MouseUp"/>
+
+                    <!-- A transparent outer circle makes wheel rotation usable
+                         right out to the visible edge of the black knob. -->
+                    <Ellipse Canvas.Left="-12"
+                             Canvas.Top="-8"
+                             Width="288"
+                             Height="286"
+                             Fill="Transparent"
+                             Stroke="#50FF8F8F"
+                             StrokeThickness="4"
+                             IsHitTestVisible="False"/>
+                </Canvas>
+
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</Window>
